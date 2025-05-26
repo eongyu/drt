@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<robot name="sketch_bot" xmlns="http://www.ros.org/schema/srdf" xmlns:xacro="http://ros.org/wiki/xacro" version="1.0">
+  <virtual_joint name="virtual_joint" type="fixed" parent_frame="world" child_link="base_link"/>
+  <group name="arm_group">
+    <joint name="slider_joint"/>
+    <joint name="arm_joint"/>
+  </group>
+</robot>

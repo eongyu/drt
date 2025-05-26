@@ -1,0 +1,6 @@
+controller_list:
+  - name: fake_arm_group_controller
+    type: JointTrajectoryController
+    joints:
+      - slider_joint
+      - arm_joint
