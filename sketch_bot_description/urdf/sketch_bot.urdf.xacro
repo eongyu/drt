@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<robot name="sketch_bot" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <!-- Base -->
+  <link name="base_link">
+    <visual>
+      <origin xyz="0 0 0.5" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.3 0.3 1.0"/>
+      </geometry>
+      <material name="gray"><color rgba="0.6 0.6 0.6 1.0"/></material>
+    </visual>
+  </link>
+
+  <!-- Sliding unit (vertical movement) -->
+  <link name="slider">
+    <visual>
+      <origin xyz="0 0 0.1" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.3 0.3 0.2"/>
+      </geometry>
+      <material name="blue"><color rgba="0.2 0.2 1.0 1.0"/></material>
+    </visual>
+  </link>
+
+  <joint name="slider_joint" type="prismatic">
+    <parent link="base_link"/>
+    <child link="slider"/>
+    <origin xyz="0 0 0.2" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="0.0" upper="0.6" effort="10" velocity="0.5"/>
+  </joint>
+
+  <!-- Red arm that rotates like a drill -->
+  <link name="arm">
+    <visual>
+      <origin xyz="0.15 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.3 0.05 0.05"/>
+      </geometry>
+      <material name="red"><color rgba="1 0 0 1"/></material>
+    </visual>
+  </link>
+
+  <!-- Drill-like rotation around its own axis -->
+  <joint name="arm_joint" type="continuous">
+    <parent link="slider"/>
+    <child link="arm"/>
+    <origin xyz="0.15 0 0.1" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+  </joint>
+
+  <!-- Gripper -->
+  <link name="gripper">
+    <visual>
+      <origin xyz="0.1 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.1 0.05 0.05"/>
+      </geometry>
+      <material name="green"><color rgba="0 1 0 1"/></material>
+    </visual>
+  </link>
+
+  <joint name="gripper_joint" type="fixed">
+    <parent link="arm"/>
+    <child link="gripper"/>
+    <origin xyz="0.15 0 0" rpy="0 0 0"/>
+  </joint>
+
+</robot>

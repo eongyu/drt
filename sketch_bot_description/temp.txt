@@ -1,0 +1,18 @@
+ros2 launch dyros_urdf_tf dyros_robot_display_launch.py model:=robots/dyros_manipulator3r.urdf
+
+echo $AMENT_PREFIX_PATH
+ros2 pkg list | grep sketch_bot_description
+
+ros2 launch sketch_bot_description display.launch.py
+
+
+
+
+cd ~/ros2_ws
+rm -rf build/ install/ log/
+colcon build --packages-select sketch_bot_description
+
+
+source install/setup.bash
+echo $AMENT_PREFIX_PATH
+ros2 pkg list | grep sketch_bot_description
